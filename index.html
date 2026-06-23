@@ -12,8 +12,8 @@
     <div class="brand">
       <div class="mark">CK</div>
       <div>
-        <h1>Candle King Sniper</h1>
-        <div class="sub">Mirror Market Concept · QFL · QB Tracker</div>
+        <h1>Bear boy Scanner</h1>
+        <div class="sub">Mirror Market Concept · QFL · QB · Pre-Move Engine</div>
       </div>
     </div>
     <div class="actions">
@@ -37,26 +37,26 @@
     </div>
     <div class="right">
       <div class="value" id="alertCount">0</div>
-      <div class="label">Valid Setups</div>
+      <div class="label">Active Setups</div>
     </div>
   </section>
 
   <section class="grid market">
     <div class="tile"><div class="label">BTC Control</div><div class="value" id="btcPrice">-</div><div class="small" id="btcChange">-</div></div>
     <div class="tile"><div class="label">System Breadth</div><div class="value" id="marketBias">-</div><div class="small" id="biasText">Market Condition</div></div>
-    <div class="tile"><div class="label">Risk Index</div><div class="value" id="expansionRisk">-</div><div class="small">Squeeze & Variance</div></div>
+    <div class="tile"><div class="label">Expansion Index</div><div class="value" id="expansionRisk">-</div><div class="small">Squeeze & Variance</div></div>
     <div class="tile"><div class="label">Active Universe</div><div class="value" id="universe">-</div><div class="small">Volume Filtered</div></div>
     <div class="tile"><div class="label">Last Execution</div><div class="value" id="lastScan">Never</div><div class="small" id="latency">-</div></div>
     <div class="tile"><div class="label">Next Sequence</div><div class="value w" id="nextScan">90s</div><div class="small">API Sync</div></div>
   </section>
 
   <section class="grid metrics">
-    <div class="card metric green"><div class="label">MMC Buy</div><div class="value g" id="mBuy">0</div><div class="small">Symmetry Target >5%</div></div>
-    <div class="card metric red"><div class="label">MMC Sell</div><div class="value r" id="mSell">0</div><div class="small">Symmetry Target >5%</div></div>
+    <div class="card metric green"><div class="label">BUY Signals</div><div class="value g" id="mBuy">0</div><div class="small">MMC Buy + Pre-Move</div></div>
+    <div class="card metric red"><div class="label">SELL Signals</div><div class="value r" id="mSell">0</div><div class="small">MMC Sell + Pre-Move</div></div>
     <div class="card metric cyan"><div class="label">Big Up (>15%)</div><div class="value c" id="mBigUp">0</div><div class="small">Curve Alignment</div></div>
     <div class="card metric violet"><div class="label">Big Down (>15%)</div><div class="value p" id="mBigDown">0</div><div class="small">Curve Alignment</div></div>
-    <div class="card metric amber"><div class="label">QB Box Active</div><div class="value a" id="mWatch">0</div><div class="small">Volume Accumulation</div></div>
-    <div class="card metric"><div class="label">Avg Confidence</div><div class="value w" id="mAvg">-</div><div class="small">Engine Score</div></div>
+    <div class="card metric amber"><div class="label">Watching</div><div class="value a" id="mWatch">0</div><div class="small">Volume Accumulation</div></div>
+    <div class="card metric"><div class="label">Avg Score</div><div class="value w" id="mAvg">-</div><div class="small">Engine Confidence</div></div>
     <div class="card metric"><div class="label">Tracked</div><div class="value b" id="mTracked">0</div><div class="small">Live Signals</div></div>
     <div class="card metric green"><div class="label">Win Rate</div><div class="value g" id="mWin">-</div><div class="small">TP Executed</div></div>
   </section>
@@ -80,14 +80,22 @@
   </div>
 
   <main id="tab-scanner">
-    <div class="legend"><span><i class="sw" style="background:var(--green)"></i>MMC BUY</span><span><i class="sw" style="background:var(--red)"></i>MMC SELL</span><span><i class="sw" style="background:var(--cyan)"></i>BIG UP</span><span><i class="sw" style="background:var(--violet)"></i>BIG DOWN</span><span>Candle King Accuracy Mode: Only activates upon Upgraded SMC, QFL Base Cracks, Parabolic Curves, and MMC Characters.</span></div>
-    
+    <div class="legend">
+      <span><i class="sw" style="background:var(--green)"></i>BUY</span>
+      <span><i class="sw" style="background:var(--red)"></i>SELL</span>
+      <span><i class="sw" style="background:var(--cyan)"></i>BIG UP</span>
+      <span><i class="sw" style="background:var(--violet)"></i>BIG DOWN</span>
+      <span><i class="sw" style="background:var(--amber)"></i>PRE-MOVE</span>
+      <span style="color:var(--muted)">Candle King: 8-Engine confluence — QFL · MMC · SMC · QB · Velocity · Order Block · Divergence · MTF</span>
+    </div>
+
     <div class="filters" style="margin-bottom: 12px;">
       <button class="pill on" data-filter="all" onclick="setFilter(this)">All</button>
-      <button class="pill buy" data-filter="buy" onclick="setFilter(this)">BUY</button>
-      <button class="pill sell" data-filter="sell" onclick="setFilter(this)">SELL</button>
+      <button class="pill buy" data-filter="buy" onclick="setFilter(this)">BUY SIDE</button>
+      <button class="pill sell" data-filter="sell" onclick="setFilter(this)">SELL SIDE</button>
       <button class="pill" data-filter="bigup" onclick="setFilter(this)">BIG UP</button>
       <button class="pill" data-filter="bigdown" onclick="setFilter(this)">BIG DOWN</button>
+      <button class="pill pmup" data-filter="premove" onclick="setFilter(this)">⚡ PRE-MOVE</button>
       <button class="pill" data-filter="watch" onclick="setFilter(this)">WATCH</button>
     </div>
 
@@ -102,14 +110,15 @@
             <th class="right">QB Vol</th>
             <th class="right">RSI</th>
             <th class="right">QFL Base</th>
-            <th class="right">MMC Char/Curve</th>
+            <th class="right">MMC Char</th>
             <th class="right">CK SMC</th>
+            <th class="right">Velocity / Phase</th>
             <th class="right">Score</th>
             <th>Signal</th>
             <th></th>
           </tr>
         </thead>
-        <tbody id="body"><tr><td colspan="12"><div class="empty"><span class="spinner"></span> Establishing API Connections...</div></td></tr></tbody>
+        <tbody id="body"><tr><td colspan="13"><div class="empty"><span class="spinner"></span> Establishing API Connections...</div></td></tr></tbody>
       </table>
     </div>
   </main>
@@ -117,22 +126,22 @@
   <main id="tab-history" class="hide">
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Time</th><th>Market</th><th>Execution</th><th class="right">Entry</th><th class="right">Best Move</th><th>Confluence Trigger</th></tr></thead>
+        <thead><tr><th>Time</th><th>Market</th><th>Signal</th><th class="right">Entry</th><th class="right">Best Move</th><th>Confluence Trigger</th></tr></thead>
         <tbody id="histBody"><tr><td colspan="6"><div class="empty">History populates upon verified structural alignment.</div></td></tr></tbody>
       </table>
     </div>
   </main>
-  
+
   <main id="tab-performance" class="hide">
     <section class="grid metrics">
-      <div class="card metric"><div class="label">Settled PnL</div><div class="value b" id="pSettled">0</div></div>
+      <div class="card metric"><div class="label">Settled PnL Count</div><div class="value b" id="pSettled">0</div></div>
       <div class="card metric green"><div class="label">TP Hit</div><div class="value g" id="pWins">0</div></div>
       <div class="card metric red"><div class="label">SL Hit</div><div class="value r" id="pLosses">0</div></div>
       <div class="card metric green"><div class="label">Max Excursion</div><div class="value g" id="pBest">-</div></div>
     </section>
     <div class="tablewrap">
       <table>
-        <thead><tr><th>Market</th><th>Signal</th><th class="right">Entry</th><th class="right">Target (TP2)</th><th class="right">Stop Loss</th><th class="right">Current</th><th class="right">Excursion</th><th class="right">Status</th></tr></thead>
+        <thead><tr><th>Market</th><th>Signal</th><th class="right">Entry</th><th class="right">Target (TP2)</th><th class="right">Stop Loss</th><th class="right">Current</th><th class="right">Best Move</th><th class="right">Status</th></tr></thead>
         <tbody id="perfBody"><tr><td colspan="8"><div class="empty">No live tracks operating.</div></td></tr></tbody>
       </table>
     </div>
