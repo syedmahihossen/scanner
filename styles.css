@@ -114,3 +114,15 @@ tr.main:hover td { background: var(--panel2); }
 @media(max-width: 1200px) { .three { grid-template-columns: 1fr 1fr; } .analysis:last-child { grid-column: 1 / -1; } }
 @media(max-width: 1050px) { .market { grid-template-columns: repeat(3, 1fr); } .metrics { grid-template-columns: repeat(4, 1fr); } .setup { grid-template-columns: repeat(3, 1fr); } }
 @media(max-width: 768px) { .three { grid-template-columns: 1fr; } }
+/* === PRE-MOVE SIGNAL STYLES === */
+.pmup   { color: #fbbf24; background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.4); }
+.pmdown { color: #fb923c; background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.4); }
+.pill.pmup { color: #fbbf24; border-color: rgba(251,191,36,0.5); }
+.pill.pmup.on { background: #fbbf24; color:#000; border-color:#fbbf24; }
+
+.b { color: var(--blue); }
+.c { color: var(--cyan); }
+.p { color: var(--violet); }
+
+.legend { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:12px; font-size:11px; color:var(--muted); font-weight:600; }
+.sw { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:middle; }
